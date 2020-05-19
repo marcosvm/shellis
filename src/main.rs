@@ -1,8 +1,16 @@
 use structopt::StructOpt;
 
 fn main() {
-    let opt = Opt::from_args();
-    println!("{:?}", opt)
+    let Opt {
+        subcommand,
+        debug: _,
+    } = Opt::from_args();
+    match subcommand {
+        SubCommand::Load {
+            dry_run: d,
+            repository: r,
+        } => println!("Loading: {}, dry_run is {}", r, d),
+    }
 }
 
 #[derive(StructOpt, Debug)]
